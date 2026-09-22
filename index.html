@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aedan Barnes-Shumway — MIS &amp; Security</title>
+<meta name="description" content="Aedan Barnes-Shumway — Management Information Systems student building toward GRC and security analysis. Experience, coursework, and projects.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#D9E6DE;
+    --ink-soft:#7FA396;
+    --paper:#0A1412;
+    --paper-deep:#0F1B18;
+    --accent:#3ED9A6;
+    --accent-bright:#6BE8C1;
+    --signal:#FFB454;
+    --line: rgba(62,217,166,0.16);
+    --line-soft: rgba(62,217,166,0.09);
+    --serif: 'Spectral', Georgia, serif;
+    --sans: 'Inter', -apple-system, Segoe UI, sans-serif;
+    --mono: 'IBM Plex Mono', ui-monospace, monospace;
+    --measure: 42rem;
+  }
+
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--sans);
+    font-size:17px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{ background:var(--accent); color:var(--paper); }
+
+  a{ color:var(--accent); text-decoration-color:rgba(47,87,97,0.4); text-underline-offset:3px; }
+  a:hover{ color:var(--accent-bright); }
+  a:focus-visible, button:focus-visible{
+    outline:2px solid var(--accent-bright);
+    outline-offset:3px;
+  }
+
+  h1{ font-family:var(--serif); font-weight:600; color:var(--ink); margin:0; }
+  h2{ font-family:var(--mono); font-weight:500; color:var(--accent); margin:0; }
+  h3{ font-family:var(--sans); font-weight:700; color:var(--ink); margin:0; }
+
+  .wrap{
+    max-width:52rem;
+    margin:0 auto;
+    padding:0 1.5rem;
+  }
+  .measure{ max-width:var(--measure); }
+
+  /* ---------- Nav ---------- */
+  .site-nav{
+    position:sticky; top:0; z-index:20;
+    background:rgba(10,20,18,0.90);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .site-nav .wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    flex-wrap:wrap;
+    padding-top:0.85rem; padding-bottom:0.85rem;
+    gap:0.5rem 1.25rem;
+  }
+  .nav-mark{
+    font-family:var(--mono); font-weight:500; font-size:0.95rem;
+    color:var(--ink-soft); text-decoration:none; white-space:nowrap;
+  }
+  .nav-links{
+    display:flex; gap:1.4rem; flex-wrap:wrap;
+    list-style:none; margin:0; padding:0;
+    font-family:var(--mono); font-size:0.85rem;
+  }
+  .nav-links li{ margin-right:1.4rem; }
+  .nav-links li:last-child{ margin-right:0; }
+  .nav-links a{
+    color:var(--ink-soft); text-decoration:none;
+    padding-bottom:2px; border-bottom:1px solid transparent;
+  }
+  .nav-links a:hover, .nav-links a.active{
+    color:var(--ink); border-bottom-color:var(--accent);
+  }
+  .nav-links .resume-link{
+    color:var(--accent); font-weight:500;
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{ padding:4.5rem 0 3rem; }
+  .hero .kicker{
+    font-family:var(--sans); font-size:0.92rem; color:var(--ink-soft);
+    margin:0 0 0.9rem;
+  }
+  .hero h1{
+    font-size:clamp(2.1rem, 5vw, 3.2rem);
+    line-height:1.08;
+    letter-spacing:-0.01em;
+  }
+  .hero .role{
+    font-family:var(--serif); font-style:italic; font-weight:400;
+    color:var(--accent);
+    font-size:clamp(1.05rem, 2.4vw, 1.35rem);
+    margin:0.6rem 0 0;
+  }
+
+  .record-strip{
+    margin-top:2.4rem;
+    display:flex; flex-wrap:wrap;
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+  }
+  .record-strip div{
+    flex:1 1 220px;
+    padding:0.85rem 1.4rem 0.85rem 0;
+    margin-right:1.4rem;
+    border-right:1px solid var(--line-soft);
+    font-size:0.92rem;
+    color:var(--ink-soft);
+  }
+  .record-strip div:last-child{ border-right:none; margin-right:0; }
+  .record-strip strong{ color:var(--ink); font-family:var(--mono); font-weight:500; font-size:0.85rem; }
+
+  .hero, .record-strip{ opacity:0; animation: settle 0.7s ease-out forwards; }
+  .hero{ animation-delay:0.05s; }
+  .record-strip{ animation-delay:0.25s; }
+  @keyframes settle{
+    from{ opacity:0; transform:translateY(10px); }
+    to{ opacity:1; transform:translateY(0); }
+  }
+
+  .cursor{
+    display:inline-block; width:0.5rem; height:0.75em;
+    margin-left:8px; vertical-align:-0.08em;
+    background:var(--accent);
+    animation: blink 1.1s steps(1) infinite;
+  }
+  @keyframes blink{ 50%{ opacity:0; } }
+
+  @media (prefers-reduced-motion: reduce){
+    .hero, .record-strip{ animation:none; opacity:1; }
+    .cursor{ animation:none; }
+    html{ scroll-behavior:auto; }
+  }
+
+  /* ---------- Sections ---------- */
+  section{ padding:3.4rem 0; border-top:1px solid var(--line); }
+  section:first-of-type{ border-top:none; }
+  .section-head{ margin-bottom:1.6rem; }
+  .section-head h2{ font-size:1.2rem; letter-spacing:0; }
+  .section-head p{
+    font-family:var(--sans); color:var(--ink-soft);
+    font-size:0.98rem; margin:0.35rem 0 0; max-width:38rem;
+  }
+
+  p{ margin:0 0 1rem; max-width:var(--measure); }
+  p:last-child{ margin-bottom:0; }
+
+  /* ---------- Experience timeline ---------- */
+  .timeline{ position:relative; }
+  .role-entry{
+    position:relative;
+    padding:0 0 2.2rem 1.6rem;
+    border-left:1px solid var(--line);
+  }
+  .role-entry:last-child{ padding-bottom:0; }
+  .role-entry::before{
+    content:"";
+    position:absolute; left:-5px; top:0.35rem;
+    width:9px; height:9px; border-radius:50%;
+    background:var(--paper); border:2px solid var(--accent);
+  }
+  .role-entry h3{ font-size:1.15rem; }
+  .role-meta{
+    font-family:var(--sans); font-size:0.88rem; color:var(--ink-soft);
+    margin:0.25rem 0 0.75rem;
+  }
+  .role-meta .org{ color:var(--ink); font-weight:600; }
+
+  /* ---------- Project ---------- */
+  .stack-tags{ display:flex; flex-wrap:wrap; gap:0.5rem; margin:1.1rem 0 1.3rem; }
+  .tag{
+    font-family:var(--mono); font-size:0.78rem;
+    border:1px solid var(--line); padding:0.28rem 0.6rem;
+    margin:0 0.5rem 0.5rem 0;
+    color:var(--ink-soft); background:var(--paper-deep);
+  }
+  .stamp{
+    display:inline-flex; align-items:center; gap:6px;
+    font-family:var(--mono); font-weight:500; font-size:0.78rem;
+    color:var(--signal);
+    letter-spacing:0.01em;
+  }
+  .stamp::before{
+    content:""; flex:none;
+    width:6px; height:6px; border-radius:50%;
+    background:var(--signal);
+  }
+  .project-head{ display:flex; align-items:baseline; flex-wrap:wrap; gap:0.7rem 1rem; }
+  .project-head > *{ margin-right:1rem; }
+
+  /* ---------- Education ---------- */
+  .school-block{ margin-bottom:1.6rem; }
+  .school-block h3{ font-size:1.1rem; }
+  .school-meta{ font-size:0.9rem; color:var(--ink-soft); margin-top:0.2rem; }
+
+  .course{
+    padding:1.1rem 0;
+    border-top:1px solid var(--line-soft);
+  }
+  .course:first-of-type{ border-top:1px solid var(--line); margin-top:1.6rem; }
+  .course-head{
+    display:flex; align-items:baseline; flex-wrap:wrap; gap:0.5rem 0.8rem;
+    margin-bottom:0.35rem;
+  }
+  .course-head > *{ margin-right:0.8rem; }
+  .course-head > *:last-child{ margin-right:0; }
+  .course-code{ font-family:var(--mono); font-size:0.85rem; color:var(--accent); }
+  .course-title{ font-weight:600; }
+  .course p{ color:var(--ink-soft); font-size:0.96rem; margin:0; }
+
+  .more-courses{
+    margin-top:1.6rem; padding-top:1.2rem; border-top:1px solid var(--line);
+    font-size:0.94rem; color:var(--ink-soft);
+  }
+  .more-courses strong{ display:block; color:var(--ink); font-weight:600; margin-bottom:0.4rem; font-family:var(--sans); }
+
+  /* ---------- Contact ---------- */
+  .contact-grid{
+    display:flex; flex-wrap:wrap; gap:0.6rem 2.4rem;
+    font-size:1rem;
+  }
+  .contact-grid div{ min-width:10rem; margin:0 2.4rem 0.6rem 0; }
+  .contact-grid .label{
+    display:block; font-family:var(--mono); font-size:0.78rem; color:var(--ink-soft); margin-bottom:0.15rem;
+  }
+
+  footer{
+    border-top:1px solid var(--line);
+    padding:2rem 0 3rem;
+    font-size:0.85rem; color:var(--ink-soft);
+  }
+
+  @media (max-width:640px){
+    .hero{ padding:3rem 0 2rem; }
+    section{ padding:2.4rem 0; }
+    .record-strip div{ flex-basis:100%; border-right:none; border-bottom:1px solid var(--line-soft); padding:0.7rem 0; margin-right:0; }
+    .record-strip div:last-child{ border-bottom:none; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="wrap">
+    <a class="nav-mark" href="#top">barnes-shumway</a>
+    <ul class="nav-links">
+      <li><a href="#profile">profile</a></li>
+      <li><a href="#experience">experience</a></li>
+      <li><a href="#project">project</a></li>
+      <li><a href="#education">education</a></li>
+      <li><a href="#contact">contact</a></li>
+      <li><a class="resume-link" href="resume.pdf">resume.pdf</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div id="top" class="wrap hero">
+  <p class="kicker">sacramento, ca</p>
+  <h1>Aedan M.<br>Barnes-Shumway<span class="cursor" aria-hidden="true"></span></h1>
+  <p class="role">Management Information Systems student, building toward GRC &amp; security analysis</p>
+</div>
+
+<div class="wrap">
+  <div class="record-strip">
+    <div><strong>california dept. of justice</strong><br>2+ years, confidential investigative records</div>
+    <div><strong>cal state sacramento</strong><br>B.S. Management Information Systems, expected Dec 2026</div>
+    <div><strong>comptia security+</strong><br>Exam planned Dec 2026</div>
+  </div>
+</div>
+
+<section id="profile">
+  <div class="wrap">
+    <div class="section-head"><h2>~/profile</h2></div>
+    <div class="measure">
+      <p>I'm finishing a B.S. in Management Information Systems at California State University, Sacramento, graduating in December 2026, with a 3.94 GPA in my coursework there. Before I ever took a security class, I was already working around confidential material — two and a half years as a Student Assistant at the California Department of Justice, analyzing and documenting investigative case files and coordinating directly with agents on active cases.</p>
+      <p>That experience is a big part of why I'm pointed at governance, risk, and compliance work now. I like the discipline of it — good security isn't just knowing how an attack works, it's building the records, controls, and processes that make an organization defensible and hard to catch off guard. I'm currently taking Information Systems Security coursework, prepping to sit the CompTIA Security+ exam once that class wraps in December, and building a side project (below) to get hands-on with the kind of systems I want to eventually help secure.</p>
+      <p>Long term, I'm working toward a security-leadership track. I'd like to end up somewhere that takes mission-critical infrastructure seriously — defense-adjacent work included.</p>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <div class="section-head"><h2>~/experience</h2></div>
+    <div class="timeline measure">
+
+      <div class="role-entry">
+        <h3>Student Assistant</h3>
+        <p class="role-meta"><span class="org">California Department of Justice</span> — Sacramento, CA · March 2023 – October 2025</p>
+        <p>Supported confidential criminal investigations in a highly restricted, need-to-know environment. Analyzed and documented investigative case files, producing comprehensive reports and coordinating directly with investigative agents to support case resolution.</p>
+        <p>Coordinated archival and records-retention workflows using Excel-based tracking, review, and audit processes across departmental units, and authored and maintained standard operating procedures in Microsoft Word to keep documentation clear and consistent department-wide.</p>
+      </div>
+
+      <div class="role-entry">
+        <h3>Assistant</h3>
+        <p class="role-meta"><span class="org">International School of Tactical Medicine</span> — Sacramento, CA · August 2014 – October 2024</p>
+        <p>Tracked inventory levels for training supplies and equipment to keep programs ready to run, and managed training event schedules and day-to-day administrative coordination through Outlook and Excel.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="project">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>~/project</h2>
+      <p>What I'm building outside of coursework.</p>
+    </div>
+    <div class="measure">
+      <div class="project-head">
+        <h3 style="font-size:1.2rem;">Purple Meridian Index</h3>
+        <span class="stamp">in development</span>
+      </div>
+      <p style="margin-top:0.9rem;">Hiring in cybersecurity is still mostly resume-based — years of experience, listed certifications, keyword matches. I wanted to try building something that ranks candidates by demonstrated skill instead, closer to how competitive rating systems already work in chess and online games.</p>
+      <p>Purple Meridian Index is a candidate-ranking platform built around a Glicko-2 rating model — the same family of statistical rating systems used to rank chess and esports players — applied to cybersecurity skill rather than match outcomes. Internally, I call the resulting score an <em>IX point</em> rating.</p>
+      <p>Right now I have working HTML prototypes built, and I'm moving the project into its production form. It's very much a work in progress, and it's where I'm doing most of my hands-on full-stack and applied-security learning outside of class.</p>
+      <div class="stack-tags">
+        <span class="tag">TypeScript</span>
+        <span class="tag">Next.js</span>
+        <span class="tag">Supabase</span>
+        <span class="tag">WSL2 / Linux</span>
+        <span class="tag">Glicko-2</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="wrap">
+    <div class="section-head"><h2>~/education</h2></div>
+    <div class="measure">
+
+      <div class="school-block">
+        <h3>California State University, Sacramento</h3>
+        <p class="school-meta">B.S., Management Information Systems — expected December 2026<br>
+        CSUS GPA: 3.94/4.00 · Dean's Honor List: Spring 2025, Fall 2025, Spring 2026</p>
+      </div>
+
+      <div class="school-block">
+        <h3>American River College</h3>
+        <p class="school-meta">A.S., Business Administration — December 2024<br>GPA: 3.67/4.00</p>
+      </div>
+
+      <div class="course">
+        <div class="course-head">
+          <span class="course-code">MIS 170</span>
+          <span class="course-title">Information Systems Security</span>
+          <span class="stamp">in progress · fall 2026</span>
+        </div>
+        <p>IT security framework for enterprise infrastructure — risk and vulnerability analysis, common attack techniques, encryption, authentication, access control, security policy &amp; standards, and IT risk management/audit.</p>
+      </div>
+
+      <div class="course">
+        <div class="course-head">
+          <span class="course-code">MIS 161</span>
+          <span class="course-title">Information Systems Practicum</span>
+          <span class="stamp">in progress · fall 2026</span>
+        </div>
+        <p>Capstone integration of MIS coursework through a full information systems project spanning SDLC, project management, application development, database management, and security.</p>
+      </div>
+
+      <div class="course">
+        <div class="course-head">
+          <span class="course-code">MIS 160</span>
+          <span class="course-title">Systems Development Life Cycle</span>
+        </div>
+        <p>Team-based analysis, design, and development of a business information system using structured SDLC methodology, tools, and case techniques.</p>
+      </div>
+
+      <div class="course">
+        <div class="course-head">
+          <span class="course-code">MIS 150</span>
+          <span class="course-title">Database Systems for Business</span>
+        </div>
+        <p>Relational and object-relational database modeling; database creation and manipulation; data administration, integrity, privacy, backup, and recovery.</p>
+      </div>
+
+      <div class="course">
+        <div class="course-head">
+          <span class="course-code">MIS 140</span>
+          <span class="course-title">Business Data Communication</span>
+        </div>
+        <p>Enterprise data communication networks — wired/wireless LAN, WAN, internet, and cloud infrastructure.</p>
+      </div>
+
+      <div class="course">
+        <div class="course-head">
+          <span class="course-code">MIS 101</span>
+          <span class="course-title">Computer Information Systems for Management</span>
+        </div>
+        <p>Information systems from a management perspective — transaction processing, decision support, strategic planning, and security/controls in IT acquisition.</p>
+      </div>
+
+      <div class="course">
+        <div class="course-head">
+          <span class="course-code">MIS 130</span>
+          <span class="course-title">Responsible Use of AI</span>
+          <span class="stamp">in progress · fall 2026</span>
+        </div>
+        <p>Ethical, legal, and governance dimensions of AI systems — bias, fairness, transparency, and accountability in AI deployment.</p>
+      </div>
+
+      <div class="course">
+        <div class="course-head">
+          <span class="course-code">BUS 162</span>
+          <span class="course-title">Project Management</span>
+        </div>
+        <p>Project management processes, methodologies, and tools — scheduling, resource allocation, and life-cycle cost management.</p>
+      </div>
+
+      <div class="more-courses">
+        <strong>Additional business coursework</strong>
+        Intro to Business Analytics (DS 101) · Business Communications (MGMT 102) · Contemporary Organizations (HROB 101) · Business Finance (FIN 101) · Principles of Marketing (MKTG 101) · Operations Management (OPM 101)
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="section-head"><h2>~/contact</h2></div>
+    <div class="contact-grid">
+      <div>
+        <span class="label">email</span>
+        <a href="mailto:aedanmatthew2001@outlook.com">aedanmatthew2001@outlook.com</a>
+      </div>
+      <div>
+        <span class="label">linkedin</span>
+        <a href="https://www.linkedin.com/in/aedan-barnes-shumway-304a51195">linkedin.com/in/aedan-barnes-shumway</a>
+      </div>
+      <div>
+        <span class="label">github</span>
+        <a href="https://github.com/yourusername">github.com/yourusername</a>
+      </div>
+      <div>
+        <span class="label">résumé</span>
+        <a href="resume.pdf">resume.pdf</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">Aedan M. Barnes-Shumway · Sacramento, CA</div>
+</footer>
+
+<script>
+  // Highlight the current section in the nav as you scroll.
+  const links = document.querySelectorAll('.nav-links a[href^="#"]');
+  const sections = [...links].map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+  if ('IntersectionObserver' in window && sections.length){
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        const id = '#' + entry.target.id;
+        const link = document.querySelector('.nav-links a[href="' + id + '"]');
+        if (!link) return;
+        if (entry.isIntersecting) links.forEach(l => l.classList.remove('active'));
+        if (entry.isIntersecting) link.classList.add('active');
+      });
+    }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+    sections.forEach(s => obs.observe(s));
+  }
+</script>
+
+</body>
+</html>
